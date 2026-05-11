@@ -17,13 +17,15 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+  Dijkstra from S finds the cheapest path to each node, but
+  visiting all relics means choosing an order and different orders have
+  different total costs, and a single run cannot compare them.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
-
+  The order to visit the relics. Once we calaulate the travel costs between all relics,
+  we need to arrange them to minimize the fuel consumption.
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  Greedy choices don't guarantee the best result, so all permutations must be checked.
 
 ---
 
@@ -35,8 +37,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Spawn node | Route always starts here because its the distances from spawn to all relics and exit |
+| Each relic node | We need a map of the distances between every relic and the exit to find the fastest way out. |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +46,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Nested dictionary |
+| What the keys represent | A source node u which is the starting point of a shortest-path query |
+| What the values represent | dist_table[u][v] = minimum fuel cost from u to any node v in the graph |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | looking up dist_table[u][v] hashes u then v directly to the stored value with no traversal needed |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** k + 1 
+- **Cost per run:** O((V + E) log V)
+- **Total complexity:** O((k + 1)(V + E) log V)
+- **Justification (one line):** Each run processes every edge once and every heap costs O(log V), repeated k + 1 times.
 
 ---
 

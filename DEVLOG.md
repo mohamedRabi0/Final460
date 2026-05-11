@@ -16,6 +16,12 @@
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
 _Your entry here._
+My plan is to implement the pipeline in order: start with run_dijkstra since
+everything else depends on the correct shortest path distances, then build
+select_sources and precompute_distances, and finish with the
+backtracking search. The most difficult part is _explore, getting
+pruning correct and making sure backtracking works. I'll 
+test each function on small graphs before running the actual tests.
 
 ---
 
@@ -25,6 +31,8 @@ _Your entry here._
 > you encountered. Describe what went wrong and how you resolved it.
 
 _Your entry here._
+Instead of checking every single spot, I'm only starting from the spawn and relics. 
+Since the exit is only a destination, this makes the pre-calculation much faster.
 
 ---
 
