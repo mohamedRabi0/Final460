@@ -68,6 +68,7 @@
 > Document your understanding of why Dijkstra produces correct distances.
 > Bullet points and short sentences throughout. No paragraphs.
 
+
 ### Part 3a: What the Invariant Means
 
 > Two bullets: one for finalized nodes, one for non-finalized nodes.
@@ -75,9 +76,12 @@
 
 - **For nodes already finalized (in S):**
   _Your answer here._
+  dist[u] is the true shortest distance — it won't change.
+
 
 - **For nodes not yet finalized (not in S):**
   _Your answer here._
+  dist[v] is the best distance found so far, but may still improve.
 
 ### Part 3b: Why Each Phase Holds
 
@@ -85,18 +89,26 @@
 
 - **Initialization : why the invariant holds before iteration 1:**
   _Your answer here._
+  dist[source] = 0 before any iteration. Everything else is float('inf') since no paths have been explored yet.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
   _Your answer here._
+  We always get the node with the smallest distance.
+  Since edge weights are nonnegative, no unfinalized path can do better, so
+  locking it in is safe. Relaxing neighbors can lower their distances.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
   _Your answer here._
+  Once the heap is empty, every reachable node is finalized and
+  holds its true shortest distance. Unreachable nodes stay as float('inf').
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
 _Your answer here._
+Wrong distances would cause find_optimal_route to pick
+the wrong relic order and return a suboptimal route.
 
 ---
 
@@ -104,20 +116,15 @@ _Your answer here._
 
 ### Why Greedy Fails
 
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
-
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** Picking the nearest unvisited relic each step can cause expensive moves later.
+- **Counter-example setup:** Spawn S, relics B, C, D, exit T. Edges: S-B=1, S-C=2, S-D=2, B-D=1, B-T=1, C-B=1, C-T=1, D-B=1, D-C=1.
+- **What greedy picks:** Nearest to S is B and cost 1, nearest remaining from B is D and cost 1, then C cost 1, then T cost 1. Total = 4.
+- **What optimal picks:** Same cost in this example, but greedy has no guarantee changing one weight breaks it while search still finds the true minimum.
+- **Why greedy loses:** It commits to a local choice without seeing how it affects the remaining steps.
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
-- _Your answer here._
+- The algorithm must consider every possible order of visiting the relics and return the one with the lowest total fuel cost.
 
 ---
 
@@ -125,34 +132,26 @@ _Your answer here._
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | current_loc | node (str or int) | The node the torchbearer is currently at |
+| Relics already collected | relics_visited_order | list[node] | Ordered of relics visited so far |
+| Fuel cost so far | cost_so_far | float | Total cost from spawn to current location |
 
 ### Part 5b: Data Structure for Visited Relics
 
-> Fill in the table.
-
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | Python set for relics_remaining |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) set.remove(relic) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) set.add(relic) |
+| Why this structure fits | Backtracking needs fast add and remove a set gives O(1) for both with no duplicates |
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
-
+- **Worst-case number of orders considered:** k!
+- **Why:** At each level of the search we branch once for each remaining relic k choices, then k-1, then k-2, down to 1, which is k! in the worst case.
 ---
 
 ## Part 6: Pruning

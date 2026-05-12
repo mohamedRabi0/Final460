@@ -134,7 +134,36 @@ def dijkstra_invariant_check():
 
     TODO
     """
-    return "TODO"
+    return """
+    ## Part 3: Algorithm Correctness
+
+    ### Part 3a: What the Invariant Means
+
+    - **For nodes already finalized (in S):**
+    dist[u] is the true shortest distance — it won't change.
+
+
+    - **For nodes not yet finalized (not in S):**
+    dist[v] is the best distance found so far, but may still improve.
+
+    ### Part 3b: Why Each Phase Holds
+
+    - **Initialization : why the invariant holds before iteration 1:**
+    dist[source] = 0 before any iteration. Everything else is float('inf') since no paths have been explored yet.
+
+    - **Maintenance : why finalizing the min-dist node is always correct:**
+    We always get the node with the smallest distance.
+    Since edge weights are nonnegative, no unfinalized path can do better, so
+    locking it in is safe. Relaxing neighbors can lower their distances.
+
+    - **Termination : what the invariant guarantees when the algorithm ends:**
+    Once the heap is empty, every reachable node is finalized and
+    holds its true shortest distance. Unreachable nodes stay as float('inf').
+
+    ### Part 3c: Why This Matters for the Route Planner
+    Wrong distances would cause find_optimal_route to pick
+    the wrong relic order and return a suboptimal route.
+    """
 
 
 # =============================================================================
@@ -151,7 +180,22 @@ def explain_search():
 
     TODO
     """
-    return "TODO"
+    return """
+    ## Part 4: Search Design
+
+    ### Why Greedy Fails
+
+    - **The failure mode:** Picking the nearest unvisited relic each step can cause expensive moves later.
+    - **Counter-example setup:** Spawn S, relics B, C, D, exit T. Edges: S-B=1, S-C=2, S-D=2, B-D=1, B-T=1, C-B=1, C-T=1, D-B=1, D-C=1.
+    - **What greedy picks:** Nearest to S is B and cost 1, nearest remaining from B is D and cost 1, then C cost 1, then T cost 1. Total = 4.
+    - **What optimal picks:** Same cost in this example, but greedy has no guarantee changing one weight breaks it while search still finds the true minimum.
+    - **Why greedy loses:** It commits to a local choice without seeing how it affects the remaining steps.
+
+    ### What the Algorithm Must Explore
+
+    - The algorithm must consider every possible order of visiting the relics and return the one with the lowest total fuel cost.
+
+    """
 
 
 # =============================================================================

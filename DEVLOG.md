@@ -10,7 +10,7 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [05/11]: Initial Plan
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
@@ -25,7 +25,7 @@ test each function on small graphs before running the actual tests.
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [05/11]: [Short description]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
@@ -36,7 +36,7 @@ Since the exit is only a destination, this makes the pre-calculation much faster
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [05/12]: [Short description]
 
 _Your entry here._
 
