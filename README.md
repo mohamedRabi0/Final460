@@ -76,7 +76,7 @@
 
 - **For nodes already finalized (in S):**
   _Your answer here._
-  dist[u] is the true shortest distance — it won't change.
+  dist[u] is the true shortest distance it doesn't change.
 
 
 - **For nodes not yet finalized (not in S):**
