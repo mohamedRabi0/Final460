@@ -14,7 +14,6 @@
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
 My plan is to implement the pipeline in order: start with run_dijkstra since
 everything else depends on the correct shortest path distances, then build
 select_sources and precompute_distances, and finish with the
@@ -29,7 +28,7 @@ test each function on small graphs before running the actual tests.
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+
 Instead of checking every single spot, I'm only starting from the spawn and relics. 
 Since the exit is only a destination, this makes the pre-calculation much faster.
 
@@ -37,7 +36,6 @@ Since the exit is only a destination, this makes the pre-calculation much faster
 
 ## Entry 3 – [05/13]: [Short description]
 
-_Your entry here._
 I started with a list and used list.remove() during backtracking, but
 remove() is O(k). Switched to a set since add and remove are both O(1), making backtracking a clean one-liner.
 Kept a separate list just to track visit order for the return value.
@@ -49,7 +47,6 @@ Kept a separate list just to track visit order for the return value.
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
 
-_Your entry here._
 Everything passes all five provided tests. If I had more time I would add a
 tighter lower bound to the pruning — for example adding the cheapest edge
 out of the current node before comparing against best[0], which would cut

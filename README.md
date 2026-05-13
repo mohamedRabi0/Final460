@@ -75,12 +75,10 @@
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
   dist[u] is the true shortest distance it doesn't change.
 
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
   dist[v] is the best distance found so far, but may still improve.
 
 ### Part 3b: Why Each Phase Holds
@@ -88,17 +86,14 @@
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
   dist[source] = 0 before any iteration. Everything else is float('inf') since no paths have been explored yet.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
   We always get the node with the smallest distance.
   Since edge weights are nonnegative, no unfinalized path can do better, so
   locking it in is safe. Relaxing neighbors can lower their distances.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
   Once the heap is empty, every reachable node is finalized and
   holds its true shortest distance. Unreachable nodes stay as float('inf').
 
@@ -106,7 +101,6 @@
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
 Wrong distances would cause find_optimal_route to pick
 the wrong relic order and return a suboptimal route.
 
@@ -176,8 +170,6 @@ the wrong relic order and return a suboptimal route.
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
 - Pruning is safe because all edge weights are nonnegative. Once cost_so_far >= best[0] it adds zero or more cost so the final total can never beat best[0]. No optimal solution gets skipped.
 - The condition uses >= so it also prunes ties and we already have a solution of equal cost so no duplicates.
 
