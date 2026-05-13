@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Mohamed Rabi
+**Student ID:**   827682382
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -160,23 +160,26 @@ the wrong relic order and return a suboptimal route.
 
 > Three bullets.
 
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** The minimum total fuel cost found so far and the relic order both stored in the list called best.
+- **When it is used:** At the start of every recursive callbefore branching into relic.
+- **What it allows the algorithm to skip:** Any branch where cost_so_far already is equal to or greater than best[0] the whole subtree gets abandoned.
+
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** cost_so_far, the set of remaining relics, and the shortest path distances between all relevant nodes.
+- **What the lower bound accounts for:** The exact cost so far.
+- **Why it never overestimates:** cost_so_far is the exact cost of steps already taken not an estimate, so its a lower bound.
 
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
 
 - _Your answer here._
+- Pruning is safe because all edge weights are nonnegative. Once cost_so_far >= best[0] it adds zero or more cost so the final total can never beat best[0]. No optimal solution gets skipped.
+- The condition uses >= so it also prunes ties and we already have a solution of equal cost so no duplicates.
 
 ---
 
@@ -185,3 +188,4 @@ the wrong relic order and return a suboptimal route.
 > Bullet list. If none beyond lecture notes, write that.
 
 - _Your references here._
+Class lecture slides

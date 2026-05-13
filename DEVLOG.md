@@ -1,8 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
-
+**Student Name:** Mohamed Rabi
+**Student ID:**   827682382
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
 > sitting. Graders check that entries reflect genuine work across multiple sessions.
@@ -36,33 +35,41 @@ Since the exit is only a destination, this makes the pre-calculation much faster
 
 ---
 
-## Entry 3 – [05/12]: [Short description]
+## Entry 3 – [05/13]: [Short description]
 
 _Your entry here._
+I started with a list and used list.remove() during backtracking, but
+remove() is O(k). Switched to a set since add and remove are both O(1), making backtracking a clean one-liner.
+Kept a separate list just to track visit order for the return value.
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [05/13]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
 
 _Your entry here._
+Everything passes all five provided tests. If I had more time I would add a
+tighter lower bound to the pruning — for example adding the cheapest edge
+out of the current node before comparing against best[0], which would cut
+more branches on dense graphs. I would also look into bitmask DP to bring
+worst-case complexity from O(k!) down to O(2^k * k^2).
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – [05/13]: Time Estimate
 
 > Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 1: Problem Analysis | 0.5 |
+| Part 2: Precomputation Design | 0.75 |
+| Part 3: Algorithm Correctness | 0.5 |
+| Part 4: Search Design | 0.5 |
+| Part 5: State and Search Space | 0.5 |
+| Part 6: Pruning | 0.5 |
+| Part 7: Implementation | 2.0 |
+| README and DEVLOG writing | 1.0 |
+| **Total** | **6.25** |
